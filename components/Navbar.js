@@ -10,7 +10,7 @@ export default function Navbar() {
         <div className=''>
           <h1 className="font-bold text-xl uppercase ">#AlwaysReading</h1>
         </div>
-        <div className='justify-self-center'>
+        <div className='justify-self-center hidden lg:block'>
           <Link href="/" className={router.pathname == "/" ? 'mr-5 font-semibold' : 'mr-5'}>Home</Link>
           <Link href="/blog" className='mr-5'>Blog</Link>
           <Link href="/about" >About</Link>
