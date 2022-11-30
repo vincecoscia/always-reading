@@ -1,23 +1,23 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { client } from '../utils/client'
+
 import Navbar from '../components/Navbar'
 
-export default function Home() {
+export default function Home({ posts }) {
+  console.log(posts)
   return (
     <div>
-      <Head>
-        <title>#AlwaysReading</title>
-        <meta name="description" content="A blog explaining how to be always reading" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Navbar/>
-        
-      </main>
-
-      <footer>
-      </footer>
+      HOME
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const res = await client.fetch(`*[_type == "post"]{title, slug, mainImage, excerpt}`);
+  return {
+    props: {
+      posts: res,
+    },
+  };
 }
