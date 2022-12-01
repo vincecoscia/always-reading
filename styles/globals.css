@@ -21,3 +21,25 @@ html {
   top: 0px;
   overflow: hidden;
 }
+
+/* Make basic styles for each element that is inside a div with the "blog" class */
+.blog > h1 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.blog > h2 {
+  @apply text-3xl font-bold mb-3;
+}
+
+.blog > h3 {
+  @apply text-2xl font-bold mb-2;
+}
+
+.blog > h4 {
+  @apply text-xl font-bold mb-1;
+}
+
+.blog > p {
+  @apply text-base mb-4;
+}
+
