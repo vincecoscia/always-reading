@@ -5,8 +5,6 @@ import { useState } from "react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(isOpen);
-
   const router = useRouter();
 
   const handleOpen = () => {

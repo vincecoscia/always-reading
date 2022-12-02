@@ -6,7 +6,7 @@ export default function Card({ post }) {
   return (
     <div className="bg-white rounded overflow-hidden">
       <img
-        src={urlFor(post.mainImage)}
+        src={urlFor(post.mainImage).auto("format").width(500).url()}
         width="100%"
         alt={post.title + " image"}
       />
@@ -16,7 +16,7 @@ export default function Card({ post }) {
         <div className="flex justify-between items-center mt-3">
           <div className="flex justify-content-center items-center">
             <img
-              src={urlFor(post.author.authorImage)}
+              src={urlFor(post.author.authorImage).auto("format").width(500).height(500).url()}
               className="rounded-full w-8 h-8 mr-2"
               alt={post.author.name + " image"}
             />

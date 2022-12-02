@@ -14,16 +14,22 @@ export default function BlogPost({ post, relatedPosts }) {
   return (
     <div className="mx-4 lg:mx-48 mt-10">
       <div className="justify-items-center rounded-lg">
+        <img
+          src
+          ={urlFor(post.mainImage).width(1000).height(200).fit("scale")}
+          className="w-full lg:h-36 h-24"
+          alt={post.title + " image"}
+        />
         <div className="bg-white p-5 lg:p-24 rounded relative">
-          <div className="absolute top-24 left-[-3rem] p-1 rounded-full bg-white shadow-xl">
-            <div className="flex flex-col justify-center items-center bg-slate-600 py-3 px-8 rounded-full">
-              <p className="text-white font-bold uppercase">
+          <div className="absolute lg:top-24 lg:left-[-3rem] top-[-3rem] left-[-2rem] p-1 rounded-full bg-white shadow-xl">
+            <div className="flex flex-col justify-center items-center bg-slate-600 py-3 lg:px-8 px-7 rounded-full">
+              <p className="text-white font-bold uppercase lg:text-base text-xs">
                 {moment(new Date(post.publishedAt)).format("MMM")}
               </p>
-              <p className="text-white font-bold uppercase text-3xl">
+              <p className="text-white font-bold uppercase lg:text-3xl text-xl">
                 {moment(new Date(post.publishedAt)).format("D")}
               </p>
-              <p className="text-white font-bold uppercase">
+              <p className="text-white font-bold uppercase lg:text-base text-xs">
                 {" "}
                 {moment(new Date(post.publishedAt)).format("YYYY")}
               </p>
@@ -47,21 +53,22 @@ export default function BlogPost({ post, relatedPosts }) {
           </div>
         </div>
       </div>
-      <div className="mt-10 p-5 bg-white rounded">
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center">
+      <div className="mt-10 p-5 bg-white rounded text-center w-fit mx-auto">
+        <div className="flex flex-col justify-center items-center">
           <img
             src={urlFor(post.author.authorImage)
               .width(200)
               .height(200)
-              .quality(100)
               .url()}
             alt={post.author.name}
             className="rounded-full w-20 h-20"
           />
           <div>
-            <p className="text-lg font-semibold ml-2">{post.author.name}</p>
+            <p className="text-lg font-semibold mb-2">{post.author.name}</p>
+            
           </div>
-          <div className="justify-center">
+          <hr className='w-3/5'/>
+          <div className="justify-center mt-2">
             <PortableText value={post.author.bio} />
           </div>
         </div>
@@ -69,7 +76,7 @@ export default function BlogPost({ post, relatedPosts }) {
       <div className="mt-10">
         <h3 className="font-bold text-xl mb-2">Related Posts</h3>
         <hr />
-        <div className="mt-5 grid grid-cols-3 gap-5">
+        <div className="mt-5 grid lg:grid-cols-3 gap-5">
           {/* show related posts in a column */}
           {relatedPosts.map((post) => (
             <div key={post._id} className="mb-4">
