@@ -5,17 +5,30 @@ import { PortableText } from "@portabletext/react";
 import { getClient } from "../../lib/sanity.server";
 import { urlFor } from "../../lib/sanity";
 import moment from "moment";
-import { PortableTextComponents } from "../../utils/portableText";
 
 import Link from "next/link";
 import Card from "../../components/Card";
 
 export default function BlogPost({ post, relatedPosts }) {
-  console.log(post.body[0].children);
+  console.log(post.author);
   return (
     <div className="mx-4 lg:mx-48 mt-10">
       <div className="justify-items-center rounded-lg">
-        <div className="bg-white p-5 rounded">
+        <div className="bg-white p-5 lg:p-24 rounded relative">
+          <div className="absolute top-24 left-[-3rem] p-1 rounded-full bg-white shadow-xl">
+            <div className="flex flex-col justify-center items-center bg-slate-600 py-3 px-8 rounded-full">
+              <p className="text-white font-bold uppercase">
+                {moment(new Date(post.publishedAt)).format("MMM")}
+              </p>
+              <p className="text-white font-bold uppercase text-3xl">
+                {moment(new Date(post.publishedAt)).format("D")}
+              </p>
+              <p className="text-white font-bold uppercase">
+                {" "}
+                {moment(new Date(post.publishedAt)).format("YYYY")}
+              </p>
+            </div>
+          </div>
           <h1 className="text-4xl lg:text-6xl font-extrabold text-center lg:text-left">
             {post.title}
           </h1>
@@ -30,22 +43,41 @@ export default function BlogPost({ post, relatedPosts }) {
             ))}
           </div>
           <div className="blog mt-10">
-            <PortableText value={post.body} components={PortableTextComponents}/>
+            <PortableText value={post.body} />
           </div>
-          <div className="flex justify-center lg:justify-start">
-            <img
-              src={urlFor(post.author.authorImage).url()}
-              alt={post.author.name}
-              className="rounded-full w-10 h-10"
-            />
+        </div>
+      </div>
+      <div className="mt-10 p-5 bg-white rounded">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-start items-center">
+          <img
+            src={urlFor(post.author.authorImage)
+              .width(200)
+              .height(200)
+              .quality(100)
+              .url()}
+            alt={post.author.name}
+            className="rounded-full w-20 h-20"
+          />
+          <div>
             <p className="text-lg font-semibold ml-2">{post.author.name}</p>
           </div>
-
-          <div className="flex justify-center lg:justify-start">
-            <p className="text-lg font-semibold ml-2">
-              {moment(post.publishedAt).format("M/D/YY")}
-            </p>
+          <div className="justify-center">
+            <PortableText value={post.author.bio} />
           </div>
+        </div>
+      </div>
+      <div className="mt-10">
+        <h3 className="font-bold text-xl mb-2">Related Posts</h3>
+        <hr />
+        <div className="mt-5 grid grid-cols-3 gap-5">
+          {/* show related posts in a column */}
+          {relatedPosts.map((post) => (
+            <div key={post._id} className="mb-4">
+              <Link href={`/blog/${post.slug.current}`}>
+                <Card post={post} />
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -55,10 +87,12 @@ export default function BlogPost({ post, relatedPosts }) {
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
   _id,
   title,
-      author -> {
+  author -> {
       name,
       avatar,
-      "authorImage": image.asset->url
+      bio,
+      "authorImage": image.asset->url,
+      "focalPoint": image.asset->hotspot,
     },
   "categories": categories[]->{title},
   mainImage,
@@ -73,6 +107,7 @@ const relatedPostsQuery = groq`*[_type == "post" && slug.current != $slug]{
   author -> {
     name,
     avatar,
+    bio,
     "authorImage": image.asset->url
   },
   slug,

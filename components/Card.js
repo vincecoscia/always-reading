@@ -3,7 +3,6 @@ import moment from "moment";
 import { urlFor } from "../lib/sanity";
 
 export default function Card({ post }) {
-  console.log(post.author);
   return (
     <div className="bg-white rounded overflow-hidden">
       <img
