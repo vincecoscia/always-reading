@@ -15,7 +15,9 @@ export default function Navbar() {
     <nav className="lg:px-48 px-4 py-3 text-slate-900">
       <div className="container mx-auto grid grid-cols-3">
         <div className="">
-          <h1 className="font-bold text-xl uppercase ">#AlwaysReading</h1>
+          <Link href="/">
+            <h1 className="font-bold text-xl uppercase ">#AlwaysReading</h1>
+          </Link>
         </div>
         <div className="justify-self-center">
           <div className="hidden lg:block">
