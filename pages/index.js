@@ -26,8 +26,13 @@ export default function Home({ posts }) {
           ></iframe>
         </div>
       </div>
-      <hr />
-      <div className="grid lg:grid-cols-3 gap-5 justify-items-center">
+      <hr className="mb-4" />
+      <div className="mb-8">
+        <h3 className="font-semibold text-xl">
+          Latest Posts
+        </h3>
+      </div>
+      <div className="grid lg:grid-cols-3 gap-5 justify-items-center mb-24">
         {/* limit posts to most recent 3 */}
         {posts.map((post) => (
           <Link key={post._id} href={`/blog/${post.slug.current}`}>

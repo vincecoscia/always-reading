@@ -6,7 +6,7 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 export default function Blog({ posts }) {
   return (
-    <div className="mx-4 lg:mx-48 mt-10">
+    <div className="mx-4 lg:mx-48 mt-10 mb-24">
       <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
             >
