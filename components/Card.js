@@ -6,7 +6,7 @@ export default function Card({ post }) {
   return (
     <div className="bg-white rounded overflow-hidden">
       <img
-        src={urlFor(post.mainImage).auto("format").width(500).url()}
+        src={urlFor(post.mainImage).auto("format").width(400).url()}
         width="100%"
         alt={post.title + " image"}
       />

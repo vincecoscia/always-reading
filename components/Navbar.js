@@ -12,6 +12,7 @@ export default function Navbar() {
   };
 
   return (
+    <div className="container mx-auto">
     <nav className="lg:px-48 px-4 py-3 text-slate-900">
       <div className="container mx-auto grid grid-cols-3">
         <div className="">
@@ -119,5 +120,6 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+    </div>
   );
 }
