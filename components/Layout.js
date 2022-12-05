@@ -14,7 +14,9 @@ export default function Layout({ children }) {
       </Head>
       <main>
         <Navbar />
+        <div className="container mx-auto">
         {children}
+        </div>
       </main>
     </div>
   );

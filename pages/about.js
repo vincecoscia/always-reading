@@ -7,7 +7,7 @@ import { urlFor } from "../lib/sanity";
 export default function about({ author }) {
   return (
     <div className="mx-4 lg:mx-48 mt-10">
-      <div className="grid lg:grid-cols-4 bg-white p-5 rounded">
+      <div className="grid lg:grid-cols-4 gap-5 bg-white p-5 rounded">
         <div className='mb-8'>
           <img
             src={urlFor(author.image).width(500).height(500).url()}
